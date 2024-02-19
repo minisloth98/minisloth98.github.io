@@ -3,8 +3,7 @@
   <entry>
     <title>C++基础</title>
     <url>/posts/f9a964a9/</url>
-    <content><![CDATA[<p>#fleet</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li>开发环境：wsl ubuntu20.04</li>
 <li>软件：vs code</li>
 <li>开发方式：ssh远程连接到wsl ubuntu子系统上</li>
@@ -28,25 +27,27 @@
       </tags>
   </entry>
   <entry>
-    <title>香橙派5开发环境搭建</title>
-    <url>/posts/bb962181/</url>
-    <content><![CDATA[<h2 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h2>]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>rknn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jetson nano开发环境搭建</title>
     <url>/posts/f551e373/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>玩转jetson_nano</category>
       </categories>
       <tags>
         <tag>jetson_nano</tag>
+        <tag>tensorrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>香橙派5开发环境搭建</title>
+    <url>/posts/bb962181/</url>
+    <content><![CDATA[<h2 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h2>]]></content>
+      <categories>
+        <category>玩转香橙派</category>
+      </categories>
+      <tags>
+        <tag>香橙派5</tag>
+        <tag>rknn</tag>
       </tags>
   </entry>
 </search>
