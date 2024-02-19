@@ -24,18 +24,6 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2024/02/19/jetson_nano%E7%83%A7%E6%9C%BA/</url>
-    <content><![CDATA[<p>#fleet </p>
-<blockquote>
-<p>参考：<br><a href="https://www.cnblogs.com/conscience-remain/p/15734632.html">https://www.cnblogs.com/conscience-remain/p/15734632.html</a></p>
-</blockquote>
-<h3 id="12-针按钮接头-J12"><a href="#12-针按钮接头-J12" class="headerlink" title="12 针按钮接头 (J12)"></a>12 针按钮接头 (J12)</h3><p>该头提供 GPIO 来控制板的状态。我们额外加的套件的外壳可以连接到此接头。</p>
-<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183502034.png"></p>
-<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183829447.png"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2024/02/19/RKNN%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="接口封装层"><a href="#接口封装层" class="headerlink" title="接口封装层"></a>接口封装层</h2><p>以项目代码为例子，工程文件结构如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@linaro-alip:/userdata/2.rknn_api_test/2.rknn_api_test# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── 3rdparty</span><br><span class="line">│   └── opencv</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── build</span><br><span class="line">├── images</span><br><span class="line">├── librknn_api</span><br><span class="line">│   ├── aarch64</span><br><span class="line">│   │   └── librknnrt.so      # 64位系统 rknn库</span><br><span class="line">│   ├── armhf</span><br><span class="line">│   │   └── librknnrt.so      # 32位系统 rknn库</span><br><span class="line">│   └── include</span><br><span class="line">│       ├── rknn_api.h</span><br><span class="line">│       └── rknn_matmul_api.h</span><br><span class="line">├── src</span><br><span class="line">│   ├── engine                # 模型推理引擎</span><br><span class="line">│   │   ├── engine.h          # 虚基类 父类定义   </span><br><span class="line">│   │   ├── rknn_engine.cpp   # rknn实现接口源码 </span><br><span class="line">│   │   └── rknn_engine.h     # rknn实现接口头文件</span><br><span class="line">│   ├── process</span><br><span class="line">│   │   ├── postprocess.cpp   # 后处理代码</span><br><span class="line">│   │   ├── postprocess.h</span><br><span class="line">│   │   ├── preprocess.cpp    # 预处理代码</span><br><span class="line">│   │   └── preprocess.h</span><br><span class="line">│   ├── rknn_engine_test.cpp  # 测试代码</span><br><span class="line">│   ├── types</span><br><span class="line">│   │   ├── datatype.h        # 自定义的数据类型，将官方的数据类型封装成自定义的数据类型，</span><br><span class="line">│   │   └── error.h           # 方便后续兼容更多平台</span><br><span class="line">│   └── utils</span><br><span class="line">│       ├── engine_helper.h</span><br><span class="line">│       └── logging.h</span><br><span class="line">└── weights                  # 权重文件</span><br><span class="line">    └── mobilenet_v1.rknn </span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -48,6 +36,18 @@
 <blockquote>
 <p>注：代码的工程性很好，可以学习一下，管理自己的项目代码。</p>
 </blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/02/19/jetson_nano%E7%83%A7%E6%9C%BA/</url>
+    <content><![CDATA[<p>#fleet </p>
+<blockquote>
+<p>参考：<br><a href="https://www.cnblogs.com/conscience-remain/p/15734632.html">https://www.cnblogs.com/conscience-remain/p/15734632.html</a></p>
+</blockquote>
+<h3 id="12-针按钮接头-J12"><a href="#12-针按钮接头-J12" class="headerlink" title="12 针按钮接头 (J12)"></a>12 针按钮接头 (J12)</h3><p>该头提供 GPIO 来控制板的状态。我们额外加的套件的外壳可以连接到此接头。</p>
+<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183502034.png"></p>
+<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183829447.png"></p>
 ]]></content>
   </entry>
   <entry>
