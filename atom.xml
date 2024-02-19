@@ -37,31 +37,6 @@
   </entry>
   
   <entry>
-    <title>RKNN基础</title>
-    <link href="http://example.com/posts/bb962181/"/>
-    <id>http://example.com/posts/bb962181/</id>
-    <published>2024-02-18T10:13:36.000Z</published>
-    <updated>2024-02-19T15:12:22.976Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="接口封装层"><a href="#接口封装层" class="headerlink" title="接口封装层"></a>接口封装层</h2><p>以项目代码为例子，工程文件结构如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">root@linaro-alip:/userdata/2.rknn_api_test/2.rknn_api_test# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── 3rdparty</span><br><span class="line">│   └── opencv</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── build</span><br><span class="line">├── images</span><br><span class="line">├── librknn_api</span><br><span class="line">│   ├── aarch64</span><br><span class="line">│   │   └── librknnrt.so      # 64位系统 rknn库</span><br><span class="line">│   ├── armhf</span><br><span class="line">│   │   └── librknnrt.so      # 32位系统 rknn库</span><br><span class="line">│   └── include</span><br><span class="line">│       ├── rknn_api.h</span><br><span class="line">│       └── rknn_matmul_api.h</span><br><span class="line">├── src</span><br><span class="line">│   ├── engine                # 模型推理引擎</span><br><span class="line">│   │   ├── engine.h          # 虚基类 父类定义   </span><br><span class="line">│   │   ├── rknn_engine.cpp   # rknn实现接口源码 </span><br><span class="line">│   │   └── rknn_engine.h     # rknn实现接口头文件</span><br><span class="line">│   ├── process</span><br><span class="line">│   │   ├── postprocess.cpp   # 后处理代码</span><br><span class="line">│   │   ├── postprocess.h</span><br><span class="line">│   │   ├── preprocess.cpp    # 预处理代码</span><br><span class="line">│   │   └── preprocess.h</span><br><span class="line">│   ├── rknn_engine_test.cpp  # 测试代码</span><br><span class="line">│   ├── types</span><br><span class="line">│   │   ├── datatype.h        # 自定义的数据类型，将官方的数据类型封装成自定义的数据类型，</span><br><span class="line">│   │   └── error.h           # 方便后续兼容更多平台</span><br><span class="line">│   └── utils</span><br><span class="line">│       ├── engine_helper.h</span><br><span class="line">│       └── logging.h</span><br><span class="line">└── weights                  # 权重文件</span><br><span class="line">    └── mobilenet_v1.rknn </span><br><span class="line"></span><br></pre></td></tr></table></figure><ol><li>从项目工程代码结构可以看出，接口类的实现主要是在 engine目录下，使用虚基类定义好公共接口，所有子类都继承于虚基类，并虚基类的接口，因此可以扩展其他推理平台，譬如，增加一个awnn接口层时，只需要在engine目录下，增加awnn_engine.cpp 和 awnn_engine.h，继承NNEngine实现一个 AWEngine类即可。</li><li>datatype.h中自定义了一些数据结构，用于将官方数据类型封装成自定义类型，使其更具有通用性，方便后续兼容更多平台。</li></ol><p><img src="/posts/bb962181/image-20240218183639845.png"></p><blockquote><p>注：代码的工程性很好，可以学习一下，管理自己的项目代码。</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;接口封装层&quot;&gt;&lt;a href=&quot;#接口封装层&quot; class=&quot;headerlink&quot; title=&quot;接口封装层&quot;&gt;&lt;/a&gt;接口封装层&lt;/h2&gt;&lt;p&gt;以项目代码为例子，工程文件结构如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;ta</summary>
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="rknn" scheme="http://example.com/tags/rknn/"/>
-    
-  </entry>
-  
-  <entry>
     <title>C++基础</title>
     <link href="http://example.com/posts/f9a964a9/"/>
     <id>http://example.com/posts/f9a964a9/</id>
@@ -85,6 +60,31 @@
     
     
     <category term="cpp" scheme="http://example.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RKNN基础</title>
+    <link href="http://example.com/posts/bb962181/"/>
+    <id>http://example.com/posts/bb962181/</id>
+    <published>2024-02-18T10:13:36.000Z</published>
+    <updated>2024-02-19T15:12:22.976Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="接口封装层"><a href="#接口封装层" class="headerlink" title="接口封装层"></a>接口封装层</h2><p>以项目代码为例子，工程文件结构如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">root@linaro-alip:/userdata/2.rknn_api_test/2.rknn_api_test# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── 3rdparty</span><br><span class="line">│   └── opencv</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── build</span><br><span class="line">├── images</span><br><span class="line">├── librknn_api</span><br><span class="line">│   ├── aarch64</span><br><span class="line">│   │   └── librknnrt.so      # 64位系统 rknn库</span><br><span class="line">│   ├── armhf</span><br><span class="line">│   │   └── librknnrt.so      # 32位系统 rknn库</span><br><span class="line">│   └── include</span><br><span class="line">│       ├── rknn_api.h</span><br><span class="line">│       └── rknn_matmul_api.h</span><br><span class="line">├── src</span><br><span class="line">│   ├── engine                # 模型推理引擎</span><br><span class="line">│   │   ├── engine.h          # 虚基类 父类定义   </span><br><span class="line">│   │   ├── rknn_engine.cpp   # rknn实现接口源码 </span><br><span class="line">│   │   └── rknn_engine.h     # rknn实现接口头文件</span><br><span class="line">│   ├── process</span><br><span class="line">│   │   ├── postprocess.cpp   # 后处理代码</span><br><span class="line">│   │   ├── postprocess.h</span><br><span class="line">│   │   ├── preprocess.cpp    # 预处理代码</span><br><span class="line">│   │   └── preprocess.h</span><br><span class="line">│   ├── rknn_engine_test.cpp  # 测试代码</span><br><span class="line">│   ├── types</span><br><span class="line">│   │   ├── datatype.h        # 自定义的数据类型，将官方的数据类型封装成自定义的数据类型，</span><br><span class="line">│   │   └── error.h           # 方便后续兼容更多平台</span><br><span class="line">│   └── utils</span><br><span class="line">│       ├── engine_helper.h</span><br><span class="line">│       └── logging.h</span><br><span class="line">└── weights                  # 权重文件</span><br><span class="line">    └── mobilenet_v1.rknn </span><br><span class="line"></span><br></pre></td></tr></table></figure><ol><li>从项目工程代码结构可以看出，接口类的实现主要是在 engine目录下，使用虚基类定义好公共接口，所有子类都继承于虚基类，并虚基类的接口，因此可以扩展其他推理平台，譬如，增加一个awnn接口层时，只需要在engine目录下，增加awnn_engine.cpp 和 awnn_engine.h，继承NNEngine实现一个 AWEngine类即可。</li><li>datatype.h中自定义了一些数据结构，用于将官方数据类型封装成自定义类型，使其更具有通用性，方便后续兼容更多平台。</li></ol><p><img src="/posts/bb962181/image-20240218183639845.png"></p><blockquote><p>注：代码的工程性很好，可以学习一下，管理自己的项目代码。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;接口封装层&quot;&gt;&lt;a href=&quot;#接口封装层&quot; class=&quot;headerlink&quot; title=&quot;接口封装层&quot;&gt;&lt;/a&gt;接口封装层&lt;/h2&gt;&lt;p&gt;以项目代码为例子，工程文件结构如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;ta</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="rknn" scheme="http://example.com/tags/rknn/"/>
     
   </entry>
   
