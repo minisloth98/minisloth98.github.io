@@ -38,7 +38,7 @@
 <li>从项目工程代码结构可以看出，接口类的实现主要是在 engine目录下，使用虚基类定义好公共接口，所有子类都继承于虚基类，并虚基类的接口，因此可以扩展其他推理平台，譬如，增加一个awnn接口层时，只需要在engine目录下，增加awnn_engine.cpp 和 awnn_engine.h，继承NNEngine实现一个 AWEngine类即可。</li>
 <li>datatype.h中自定义了一些数据结构，用于将官方数据类型封装成自定义类型，使其更具有通用性，方便后续兼容更多平台。</li>
 </ol>
-<p><img src="/assets/RKNN%E5%9F%BA%E7%A1%80/image-20240218183639845.png"></p>
+<p><img src="/2024/02/18/RKNN%E5%9F%BA%E7%A1%80/image-20240218183639845.png"></p>
 <blockquote>
 <p>注：代码的工程性很好，可以学习一下，管理自己的项目代码。</p>
 </blockquote>
@@ -76,8 +76,8 @@
 <p>参考：<br><a href="https://www.cnblogs.com/conscience-remain/p/15734632.html">https://www.cnblogs.com/conscience-remain/p/15734632.html</a></p>
 </blockquote>
 <h3 id="12-针按钮接头-J12"><a href="#12-针按钮接头-J12" class="headerlink" title="12 针按钮接头 (J12)"></a>12 针按钮接头 (J12)</h3><p>该头提供 GPIO 来控制板的状态。我们额外加的套件的外壳可以连接到此接头。</p>
-<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183502034.png"></p>
-<p><img src="/assets/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183829447.png"></p>
+<p><img src="/2024/02/18/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183502034.png"></p>
+<p><img src="/2024/02/18/jetson_nano%E7%83%A7%E6%9C%BA/jetson_nano%E7%83%A7%E6%9C%BA/image-20240218183829447.png"></p>
 ]]></content>
       <categories>
         <category>archives</category>
