@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>内核移植</title>
+    <url>/posts/33581a61/</url>
+    <content><![CDATA[<h2 id="内核源码下载"><a href="#内核源码下载" class="headerlink" title="内核源码下载"></a>内核源码下载</h2><h2 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h2>]]></content>
+      <categories>
+        <category>玩转jetson_nano</category>
+      </categories>
+      <tags>
+        <tag>jetson_nano</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>内核启动分析</title>
     <url>/posts/46fa35b4/</url>
     <content><![CDATA[<h2 id="内核启动流程"><a href="#内核启动流程" class="headerlink" title="内核启动流程"></a>内核启动流程</h2><h2 id="跟踪线索"><a href="#跟踪线索" class="headerlink" title="跟踪线索"></a>跟踪线索</h2><blockquote>
