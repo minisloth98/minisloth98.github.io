@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>系统启动耗时统计方法</title>
+    <url>/posts/8843f8df/</url>
+    <content><![CDATA[<h2 id="使用示波器和GPIO分析系统启动耗时"><a href="#使用示波器和GPIO分析系统启动耗时" class="headerlink" title="使用示波器和GPIO分析系统启动耗时"></a>使用示波器和GPIO分析系统启动耗时</h2><blockquote>
+<p>在嵌入式开发中，为了比较准确地分析系统启动的耗时情况，我们往往会使用示波器&#x2F;逻辑分析仪来分析系统的启动耗时，这样的方式比看log时间戳更加准确。在测量系统启动耗时各个阶段启动耗时之前，我们首先要了解系统的各个启动阶段，本篇结合jetson nano开发板，分析jetson nano的启动流程和各个阶段的耗时情况。</p>
+</blockquote>
+<h3 id="jetson-nano启动流程介绍"><a href="#jetson-nano启动流程介绍" class="headerlink" title="jetson nano启动流程介绍"></a>jetson nano启动流程介绍</h3><h3 id="gpio使用"><a href="#gpio使用" class="headerlink" title="gpio使用"></a>gpio使用</h3><h3 id="添加gpio代码"><a href="#添加gpio代码" class="headerlink" title="添加gpio代码"></a>添加gpio代码</h3>]]></content>
+      <tags>
+        <tag>调试</tag>
+        <tag>系统性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uboot启动流程</title>
+    <url>/posts/3b0cc093/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>玩转jetson_nano</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>内核移植</title>
+    <url>/posts/33581a61/</url>
+    <content><![CDATA[<h2 id="内核源码下载"><a href="#内核源码下载" class="headerlink" title="内核源码下载"></a>内核源码下载</h2><h2 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h2>]]></content>
+      <categories>
+        <category>玩转jetson_nano</category>
+      </categories>
+      <tags>
+        <tag>jetson_nano</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内核启动分析</title>
+    <url>/posts/46fa35b4/</url>
+    <content><![CDATA[<h2 id="内核启动流程"><a href="#内核启动流程" class="headerlink" title="内核启动流程"></a>内核启动流程</h2><h2 id="跟踪线索"><a href="#跟踪线索" class="headerlink" title="跟踪线索"></a>跟踪线索</h2><blockquote>
+<p>思考：如何找到内核源码第一条指令的位置？即如何找到内核入口处？</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>玩转jetson_nano</category>
+      </categories>
+      <tags>
+        <tag>jetson_nano</tag>
+      </tags>
+  </entry>
+</search>
