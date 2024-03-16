@@ -52,21 +52,33 @@
 <li>&#x2F;proc&#x2F;kallsysms具有动态加载模块的符号已经静态代码（kernel image）的符号表；而system.map仅是静态代码（kernel image）的符号表；正在运行的内核可能和system.map不匹配，所以&#x2F;proc&#x2F;kallsyms才是内核符号的参考主要来源，我们应该通过&#x2F;proc&#x2F;kallsyms获得符号地址。</li>
 <li>system.map是文件系统上的实际文件，每次内核编译都会生成一个新的system.map; &#x2F;proc&#x2F;kallsyms是内核启动时，动态创建的 proc文件，实际上，它并不是真正的磁盘文件，它是内核数据的表示，已经加载到内存中，因此对于当前正在运行的内核，它总是正确的。</li>
 </ol>
-<p><img src="/%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E5%88%86%E6%9E%90/image-20240316111612279.png" alt="image-20240316111612279"></p>
-<h3 id="如何利用system-map"><a href="#如何利用system-map" class="headerlink" title="如何利用system.map"></a>如何利用system.map</h3><ul>
+<p><img src="/posts/46fa35b4/image-20240316111612279.png" alt="image-20240316111612279"></p>
+<h3 id="如何使用system-map"><a href="#如何使用system-map" class="headerlink" title="如何使用system.map"></a>如何使用system.map</h3><ul>
 <li>addr2line（address to line）命令 用于将程序指令地址转换为所对应的函数名，以及函数所在的源文件名和行号，当含有调试信息（-g）的执行程序出现crash时（core dumped），可使用addr2line命令快速定位出错的位置</li>
 <li>如果无法确定文件名或者函数名，addr2line将在它们的位置打印两个问号；</li>
 <li>如果无法确定行号，addr2line将打印0或者一个问号。</li>
 </ul>
 <p>如我们在System.map中，找几个关键的函数信息，试图定位到其具体位置：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System.map 函数 列表</span></span><br><span class="line">ffffff8008080000 T _text  			#第一条指令</span><br><span class="line">ffffff8008081800 T vectors  		# 异常向量表</span><br><span class="line">ffffff80096007f4 T start_kernel	 	# 内核初始化</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">System.map 函数 列表</span></span><br><span class="line">ffffff8008080000 T _text  			#第一条指令</span><br><span class="line">ffffff8008081800 T vectors  		# 异常向量表</span><br><span class="line">ffffff80095d0800 T start_kernel	 	# 内核初始化</span><br></pre></td></tr></table></figure>
 
-<p>查找地址对应的文件位置：</p>
-<p>aarch64-linux-gnu-addr2line 地址 -e vmlinux -f </p>
+<p>查找地址对应的文件位置命令：</p>
+<p><strong>aarch64-linux-gnu-addr2line 地址 -e vmlinux -f</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">aarch64-linux-gnu-addr2line ffffff8008080000 -e vmlinux -f</span><br></pre></td></tr></table></figure>
 
-<p><img src="/%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E5%88%86%E6%9E%90/image-20240316160537161.png" alt="image-20240316160537161"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">$ </span><br><span class="line"> /home/yhai/kernel-4.9/arch/arm64/kernel/head.S:83</span><br><span class="line"></span><br><span class="line">$ aarch64-linux-gnu-addr2line ffffff8008081800 -e vmlinux -f</span><br><span class="line">vectors</span><br><span class="line">/home/yhai/kernel-4.9/arch/arm64/kernel/entry.S:393</span><br><span class="line"> </span><br><span class="line"> $aarch64-linux-gnu-addr2line ffffff80096007f4 -e vmlinux -f</span><br><span class="line">  start_kernel</span><br><span class="line">  /home/yhai/kernel-4.9/init/main.c:482</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line"> </span><br><span class="line">&#123;//arch/arm64/kernel/vmlinux.lds.S  连接脚本：指定程序在代码段数据段中如何分配</span><br><span class="line"> 21 OUTPUT_ARCH(aarch64)</span><br><span class="line"> 22 ENTRY(_text)  //入口地址</span><br><span class="line">110 SECTIONS</span><br><span class="line">111 &#123;</span><br><span class="line">130     .head.text : &#123;</span><br><span class="line">131         _text = .;    //代码段连接的时，第一条指令的位置</span><br><span class="line">132         HEAD_TEXT</span><br><span class="line">133     &#125;</span><br><span class="line">134     .text : &#123;           /* Real text segment        */</span><br><span class="line">135         _stext = .;     /* Text and read-only data  */</span><br><span class="line">136             __exception_text_start = .;</span><br><span class="line">137             *(.exception.text)</span><br><span class="line">138             __exception_text_end = .;</span><br><span class="line">139             IRQENTRY_TEXT</span><br><span class="line">140             SOFTIRQENTRY_TEXT</span><br><span class="line">141             ENTRY_TEXT</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/46fa35b4/image-20240316160537161.png" alt="image-20240316160537161"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">aarch64-linux-gnu-addr2line ffffff8008081800 -e vmlinux -f</span><br></pre></td></tr></table></figure>
+
+<p><img src="/posts/46fa35b4/image-20240316164424068.png" alt="image-20240316164424068"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">aarch64-linux-gnu-addr2line ffffff80095d0800 -e vmlinux -f</span><br></pre></td></tr></table></figure>
+
+<p><img src="/posts/46fa35b4/image-20240316164644775.png" alt="image-20240316164644775"></p>
+<h3 id="链接脚本"><a href="#链接脚本" class="headerlink" title="链接脚本"></a>链接脚本</h3><ul>
+<li>链接脚本指定了程序在代码段数据段中如何分配，所以可以通过链接脚本分析内核的入口</li>
+</ul>
+<ul>
+<li>内核的链接脚本：arch&#x2F;arm64&#x2F;kernel&#x2F;vmlinux.lds.S，链接脚本的部分内容如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">OUTPUT_ARCH(aarch64)</span><br><span class="line">ENTRY(_text)			# 入口地址</span><br><span class="line"></span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">        . = KIMAGE_VADDR + TEXT_OFFSET;</span><br><span class="line"></span><br><span class="line">        .head.text : &#123;</span><br><span class="line">                _text = .;		# 代码段链接时，第一条指令的位置</span><br><span class="line">                HEAD_TEXT</span><br><span class="line">        &#125;</span><br><span class="line">        .text : &#123;                       /* Real text segment            */</span><br><span class="line">                _stext = .;             /* Text and read-only data      */</span><br><span class="line">                        __exception_text_start = .;</span><br><span class="line">                        *(.exception.text)</span><br><span class="line">                        __exception_text_end = .;</span><br><span class="line">                        IRQENTRY_TEXT</span><br><span class="line">                        SOFTIRQENTRY_TEXT</span><br><span class="line">                        ENTRY_TEXT</span><br><span class="line">                        TEXT_TEXT</span><br><span class="line">                  &#125;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
