@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>系统启动耗时统计方法</title>
-    <url>/posts/8843f8df/</url>
-    <content><![CDATA[<h2 id="使用示波器和GPIO分析系统启动耗时"><a href="#使用示波器和GPIO分析系统启动耗时" class="headerlink" title="使用示波器和GPIO分析系统启动耗时"></a>使用示波器和GPIO分析系统启动耗时</h2><blockquote>
-<p>在嵌入式开发中，为了比较准确地分析系统启动的耗时情况，我们往往会使用示波器&#x2F;逻辑分析仪来分析系统的启动耗时，这样的方式比看log时间戳更加准确。在测量系统启动耗时各个阶段启动耗时之前，我们首先要了解系统的各个启动阶段，本篇结合jetson nano开发板，分析jetson nano的启动流程和各个阶段的耗时情况。</p>
-</blockquote>
-<h3 id="jetson-nano启动流程介绍"><a href="#jetson-nano启动流程介绍" class="headerlink" title="jetson nano启动流程介绍"></a>jetson nano启动流程介绍</h3><h3 id="gpio使用"><a href="#gpio使用" class="headerlink" title="gpio使用"></a>gpio使用</h3><h3 id="添加gpio代码"><a href="#添加gpio代码" class="headerlink" title="添加gpio代码"></a>添加gpio代码</h3>]]></content>
-      <tags>
-        <tag>调试</tag>
-        <tag>系统性能优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>uboot启动流程</title>
-    <url>/posts/3b0cc093/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>玩转jetson_nano</category>
-      </categories>
-  </entry>
-  <entry>
     <title>内核移植</title>
     <url>/posts/33581a61/</url>
     <content><![CDATA[<h2 id="内核源码下载"><a href="#内核源码下载" class="headerlink" title="内核源码下载"></a>内核源码下载</h2><h2 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h2>]]></content>
@@ -73,15 +53,20 @@
 
 <p><img src="/posts/46fa35b4/image-20240316164644775.png" alt="image-20240316164644775"></p>
 <h3 id="链接脚本"><a href="#链接脚本" class="headerlink" title="链接脚本"></a>链接脚本</h3><ul>
-<li>链接脚本指定了程序在代码段数据段中如何分配，所以可以通过链接脚本分析内核的入口</li>
+<li>链接脚本指定了程序在代码段数据段中如何分配，所以可以通过链接脚本分析内核的入口，ENTRY指定的标号就是整个linux内核的入口地址处。</li>
 </ul>
 <ul>
-<li>内核的链接脚本：arch&#x2F;arm64&#x2F;kernel&#x2F;vmlinux.lds.S，链接脚本的部分内容如下：</li>
+<li>内核的链接脚本：<strong>arch&#x2F;arm64&#x2F;kernel&#x2F;vmlinux.lds.S</strong>，链接脚本的部分内容如下：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">OUTPUT_ARCH(aarch64)</span><br><span class="line">ENTRY(_text)			# 入口地址</span><br><span class="line"></span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">        . = KIMAGE_VADDR + TEXT_OFFSET;</span><br><span class="line"></span><br><span class="line">        .head.text : &#123;</span><br><span class="line">                _text = .;		# 代码段链接时，第一条指令的位置</span><br><span class="line">                HEAD_TEXT</span><br><span class="line">        &#125;</span><br><span class="line">        .text : &#123;                       /* Real text segment            */</span><br><span class="line">                _stext = .;             /* Text and read-only data      */</span><br><span class="line">                        __exception_text_start = .;</span><br><span class="line">                        *(.exception.text)</span><br><span class="line">                        __exception_text_end = .;</span><br><span class="line">                        IRQENTRY_TEXT</span><br><span class="line">                        SOFTIRQENTRY_TEXT</span><br><span class="line">                        ENTRY_TEXT</span><br><span class="line">                        TEXT_TEXT</span><br><span class="line">                  &#125;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
+<h3 id="linux内核入口分析"><a href="#linux内核入口分析" class="headerlink" title="linux内核入口分析"></a>linux内核入口分析</h3><ul>
+<li><p>从上面的链接脚本找到linux内核的入口位于 <strong>_text</strong>所在位置处，结合System.map文件 和 addr2line工具找到 _text 所在位置：arch&#x2F;arm64&#x2F;kernel&#x2F;head.S:83。</p>
+<p>  <img src="/posts/46fa35b4/image-20240316171134243.png" alt="image-20240316171134243"></p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>玩转jetson_nano</category>
@@ -89,5 +74,25 @@
       <tags>
         <tag>jetson_nano</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>系统启动耗时统计方法</title>
+    <url>/posts/8843f8df/</url>
+    <content><![CDATA[<h2 id="使用示波器和GPIO分析系统启动耗时"><a href="#使用示波器和GPIO分析系统启动耗时" class="headerlink" title="使用示波器和GPIO分析系统启动耗时"></a>使用示波器和GPIO分析系统启动耗时</h2><blockquote>
+<p>在嵌入式开发中，为了比较准确地分析系统启动的耗时情况，我们往往会使用示波器&#x2F;逻辑分析仪来分析系统的启动耗时，这样的方式比看log时间戳更加准确。在测量系统启动耗时各个阶段启动耗时之前，我们首先要了解系统的各个启动阶段，本篇结合jetson nano开发板，分析jetson nano的启动流程和各个阶段的耗时情况。</p>
+</blockquote>
+<h3 id="jetson-nano启动流程介绍"><a href="#jetson-nano启动流程介绍" class="headerlink" title="jetson nano启动流程介绍"></a>jetson nano启动流程介绍</h3><h3 id="gpio使用"><a href="#gpio使用" class="headerlink" title="gpio使用"></a>gpio使用</h3><h3 id="添加gpio代码"><a href="#添加gpio代码" class="headerlink" title="添加gpio代码"></a>添加gpio代码</h3>]]></content>
+      <tags>
+        <tag>调试</tag>
+        <tag>系统性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uboot启动流程</title>
+    <url>/posts/3b0cc093/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>玩转jetson_nano</category>
+      </categories>
   </entry>
 </search>
