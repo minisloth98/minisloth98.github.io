@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-14T16:43:23.460Z</updated>
+  <updated>2024-04-30T13:39:02.519Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rk3568环境搭建</title>
+    <link href="http://example.com/posts/91efcfc/"/>
+    <id>http://example.com/posts/91efcfc/</id>
+    <published>2024-04-30T13:32:44.000Z</published>
+    <updated>2024-04-30T13:39:02.519Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="开发板信息"><a href="#开发板信息" class="headerlink" title="开发板信息"></a>开发板信息</h2><ul><li>7寸Mipi屏幕；</li><li>OV5695摄像头；</li><li>商业级 2G + 16G；</li></ul><h2 id="ubuntu电脑服务器作为nfs服务器——uboot环境变量设置"><a href="#ubuntu电脑服务器作为nfs服务器——uboot环境变量设置" class="headerlink" title="ubuntu电脑服务器作为nfs服务器——uboot环境变量设置"></a>ubuntu电脑服务器作为nfs服务器——uboot环境变量设置</h2><ol><li><p>先在ubuntu主机上，挂载文件系统；</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount rootfs.ext4 ubuntu20desktop</span><br></pre></td></tr></table></figure></li><li><p>启动开发板，进入uboot，设置启动参数，配置启动命令，启动系统</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setenv bootargs &quot;root=/dev/nfs root=/dev/nfs nfsroot=192.168.3.80:/home/ros/ubuntu20desktop,v3 rw ip=192.168.3.22:192.168.3.80:192.168.3.1:255.255.255.0::eth0:off&quot;</span><br><span class="line"></span><br><span class="line">setenv bootcmd &quot;tftpboot 0x08300000 rk3568-evb1-ddr4-v10-linux.dtb;tftpboot 0x0027f800 boot.img ; bootm 0x0027f800 - 0x08300000&quot;</span><br><span class="line">   </span><br><span class="line">saveenv</span><br></pre></td></tr></table></figure></li><li><p>切换回emmc启动</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setenv bootargs &quot;storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal&quot;</span><br><span class="line"></span><br><span class="line">setenv bootcmd &quot;boot_android $&#123;devtype&#125; $&#123;devnum&#125;;boot_fit;bootrkp;run distro_bootcmd;&quot;</span><br></pre></td></tr></table></figure></li><li><p>重置uboot默认环境变量</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">env default -a</span><br><span class="line">saveenv</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;开发板信息&quot;&gt;&lt;a href=&quot;#开发板信息&quot; class=&quot;headerlink&quot; title=&quot;开发板信息&quot;&gt;&lt;/a&gt;开发板信息&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;7寸Mipi屏幕；&lt;/li&gt;
+&lt;li&gt;OV5695摄像头；&lt;/li&gt;
+&lt;li&gt;商业级 2G + 16G；</summary>
+      
+    
+    
+    
+    
+    <category term="rk3568" scheme="http://example.com/tags/rk3568/"/>
+    
+  </entry>
   
   <entry>
     <title>系统启动耗时统计方法</title>
